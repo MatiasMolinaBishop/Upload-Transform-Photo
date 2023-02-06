@@ -12,7 +12,6 @@ import CircularProgress from '@mui/material/CircularProgress';
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
 
 //USESTATE
-    //const [download, setDownload] = useState(false)
     const [imgBW, setImhBW] = useState('')
     const [color, setColor] = useState(false)
 
@@ -30,7 +29,6 @@ import CircularProgress from '@mui/material/CircularProgress';
         const data = new FormData()
         data.append('file', img)
         data.append('upload_preset', 'tech-challange-img')
-        //setLoading(true)
 
         try{
             dispatch({type:"START"})
@@ -39,7 +37,6 @@ import CircularProgress from '@mui/material/CircularProgress';
             dispatch({type:"POSTED", payload:postImg.data.url})
             let imgPNG = postImg.data.public_id
             setImhBW(`https://res.cloudinary.com/dubnrrtje/image/upload/e_grayscale/${imgPNG}.jpg`)
-            //setDownload(true)
      
         }catch(err){
             console.log(err)
@@ -54,7 +51,7 @@ import CircularProgress from '@mui/material/CircularProgress';
             </svg>
             <input onChange={uploadImage} type='file' name='file' placeholder='Upload Image' />
             </div>
-            {state.loading?(<CircularProgress className='loader' color="inherit" />):(<img className={!color ? 'image-style': 'image-style2' } src={state.img} alt='black&whiteImg'/>)}
+            {state.loading?<CircularProgress className='loader' color="inherit" />:<img className={!color ? 'image-style': 'image-style2' } src={state.img} alt='black&whiteImg'/>}
             <div className='button-flex'>
             {state.download && <Button variant="outlined" className='button' onClick={downloadImage}>Download</Button>}
             {state.download && <Button variant="outlined" className='button' onClick={colorPhoto}>Revert</Button>}
